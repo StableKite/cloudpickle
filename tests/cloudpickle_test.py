@@ -354,7 +354,6 @@ class CloudPickleTest(unittest.TestCase):
             assert hasattr(A_roundtrip, "__firstlineno__")
             assert A_roundtrip.__firstlineno__ == A.__firstlineno__
 
-
     def test_dynamically_generated_class_that_uses_super(self):
         class Base:
             def method(self):
@@ -1529,7 +1528,6 @@ class CloudPickleTest(unittest.TestCase):
         out, _ = proc.communicate()
         self.assertEqual(proc.wait(), 0, msg="Stdout: " + str(out))
         self.assertEqual(out.strip(), b"cloudpickle.cloudpickle")
-
 
     def test_unrelated_faulty_module(self):
         # Check that pickling a dynamically defined function or class does not

@@ -229,7 +229,8 @@ def check_deterministic_pickle(a, b):
             pickletools.dis(pickletools.optimize(a), out)
             a_out = out.getvalue()
             # Remove the 11 first characters of each line to remove the bytecode offset
-            # of each object, which is different on each line for very small differences,
+            # of each object, which is different on each line for very small
+            # differences,
             # making the diff very hard to read.
             a_out = "\n".join(ll[11:] for ll in a_out.splitlines())
         with io.StringIO() as out:
@@ -243,10 +244,7 @@ def check_deterministic_pickle(a, b):
         full_diff = "".join(full_diff)
         if len(full_diff) > 1500:
             full_diff = full_diff[:1494] + " [...]"
-        raise AssertionError(
-           "Pickle payloads are not bitwise equal:\n"
-           + full_diff
-        )
+        raise AssertionError("Pickle payloads are not bitwise equal:\n" + full_diff)
 
 
 if __name__ == "__main__":

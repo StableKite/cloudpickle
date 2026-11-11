@@ -1,0 +1,5 @@
+{
+  "typeCheckingMode": "strict",
+  "pythonVersion": "3.15",
+  "include": ["positive.py"]
+}

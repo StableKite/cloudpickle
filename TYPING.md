@@ -1,7 +1,7 @@
 This fork adds adjacent PEP 561 stubs and uses standard project metadata so an
 ordinary source installation works with Flit 4. The serialization implementation
 and executable test statements are unchanged. The distribution version is
-`3.1.2+stablekite.2`.
+`3.1.2+stablekite.3`.
 
 The signatures cover the package exports, public implementation helpers, and the
 legacy `cloudpickle_fast` module. Known parameters retain their types: binary
@@ -36,3 +36,14 @@ standard library, including the existing dynamic NotImplementedType boundary.
 No public names are hidden and no external types or checking rules are weakened
 to claim a complete score. Runtime stubtest and direct strict API checks are
 qualified separately.
+
+Reduction results follow the standard structured two-through-six-item contract.
+The two reconstructed state-setter argument types depend on the constructor and
+serialized state stored in the same tuple. Like the standard pickle contract,
+only these two callback input positions use `Any`: a valid reduction can pass a
+concrete Payload and integer state to a callback accepting exactly those types.
+Requiring that callback to accept arbitrary `object` values incorrectly rejected
+that real native use in MyPy. The callback still accepts exactly two arguments
+and may return an arbitrary Python object. Tuple shapes, constructor callability
+and all other parameters remain typed. No caller Any, cast, ignore, adapter,
+private standard-library import or checking-rule override is introduced.

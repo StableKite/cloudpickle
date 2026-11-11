@@ -22,7 +22,7 @@ from collections import ChainMap as ChainMap, OrderedDict as OrderedDict
 from enum import Enum as Enum
 from pickle import PickleBuffer, load as load, loads as loads
 from types import CellType as CellType, ModuleType, NotImplementedType
-from typing import Callable, Iterator, Mapping, TypeVar
+from typing import Any, Callable, Iterator, Mapping, TypeVar
 
 _T = TypeVar("_T")
 _BufferCallback = Callable[[PickleBuffer], object]
@@ -44,7 +44,7 @@ _Reduction = (
         object,
         Iterator[object] | None,
         Iterator[object] | None,
-        Callable[[object, object], object] | None,
+        Callable[[Any, Any], object] | None,
     ]
 )
 _DispatchTable = Mapping[type[object], Callable[[object], _Reduction]]
